@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="zh-CN" data-edition="pages">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>文化视觉设计工作室</title>
+  <link rel="stylesheet" href="./app.css">
+  <script type="module" src="./app.js"></script>
+</head>
+<body>
+  <header class="top"><div class="brandmark" aria-hidden="true"><i></i><i></i><i></i></div><div><strong>文化视觉设计工作室</strong><small>PSA 品牌视觉研究原型 V0.1</small></div><span class="edition">非官方教学实验</span></header>
+  <div class="workspace">
+  <nav aria-label="工作室导航" class="nav" id="nav">
+    <button type="button" data-page="studio" aria-current="page">设计工作台</button>
+    <button type="button" data-page="knowledge">品牌知识库</button>
+    <button type="button" data-page="assets">视觉资源库</button>
+    <button type="button" data-page="rules">设计规范</button>
+    <button type="button" data-page="skills">专业 Skill</button>
+    <button type="button" data-page="workflow">Workflow</button>
+    <button type="button" data-page="history">历史作品</button>
+    <button type="button" data-page="experience">经验管理</button>
+  </nav>
+  <main>
+  <p id="message" class="message" role="status" hidden></p>
+  <section id="studio" class="page">
+    <div class="studio-head"><div><p id="mode" class="eyebrow"></p><h1 id="taskTitle">设计工作台</h1><p id="concept"></p></div><div class="actions">
+      <button id="newTask" type="button">新建任务</button><label class="compact">测试任务<select id="sample"></select></label><button id="loadSample" type="button">加载</button>
+    </div></div>
+    <div class="canvas-row">
+      <div class="preview-panel">
+        <div class="preview-tools"><div id="media" class="actions" aria-label="媒介"></div><div class="actions"><label class="compact"><input type="checkbox" id="grid">网格</label><button id="zoom" type="button">放大</button></div></div>
+        <div id="canvas" class="canvas"></div>
+        <div class="preview-foot"><span id="artSpec"></span><span id="artState"></span></div>
+      </div>
+      <aside class="controls">
+        <h2>构图与图形</h2>
+        <div class="actions variant"><button id="variantA" type="button">方案 A</button><button id="variantB" type="button">方案 B</button></div>
+        <form id="params" class="fields">
+          <label>构图<select id="layout"></select></label><label>图形语法<select id="graphic"></select></label>
+          <label>色板<select id="palette"></select></label><label>图形密度<input id="density" type="number" min=".25" max=".85" step=".01" required></label>
+          <label>标题比例<input id="titleRatio" type="number" min=".06" max=".12" step=".001" required></label><label>随机种子<input id="seed" type="number" min="0" max="4294967295" step="1" required></label>
+          <button class="primary" type="submit">应用参数</button>
+        </form>
+        <details id="taskDetails"><summary>编辑任务文案</summary>
+          <form id="textForm" class="fields"><label>任务 ID<input name="task_id" required maxlength="64"></label><label>类别<input name="category" required maxlength="40"></label><label>受众<input name="audience" required></label><label>用途<input name="purpose" required></label><label>中文标题<input name="title_zh" required></label><label>英文标题<input name="title_en" required></label><label>副标题<input name="subtitle" required></label><label>概念<input name="concept" required></label><label class="span">说明<textarea name="description" required></textarea></label><label>日期<input name="date"></label><label>地点<input name="location"></label><button type="submit">应用文案</button></form>
+        </details>
+        <details><summary>GPT 指令导入</summary><p>从外部 GPT 复制设计协议，导入后进入人工审核。</p><div class="actions"><label class="file-button">选择 JSON 文件<input type="file" id="importFile" accept=".json,application/json"></label></div><label class="input-label">设计指令 JSON<textarea id="jsonInput" rows="6"></textarea></label><button id="importBtn" type="button">校验并导入</button></details>
+      </aside>
+    </div>
+    <div class="lower">
+      <section class="panel"><h2>程序质量检测</h2><div id="checks"></div><p class="muted">GPT 审美自检通过外部 GPT 完成，网页状态为待人工审核。</p></section>
+      <section class="panel"><h2>审核与交付</h2><div id="reviewStatus" class="steps"></div><label class="input-label">审核意见<textarea id="comment" rows="2" placeholder="填写退回或优化依据"></textarea></label><div class="actions">
+      <button id="approve" type="button" class="primary"></button><button id="sendBack" type="button">退回修改</button><button id="saveHistory" type="button">保存到历史</button></div>
+      <details><summary>人工量表与审核记录</summary><div id="scores" class="fields"></div><p id="scoreResult"></p><div id="reviewLog"></div></details>
+      <div class="actions exports"><button type="button" data-export="svg">导出 SVG</button><button type="button" data-export="png">导出 PNG</button><button type="button" data-export="json">导出 JSON</button></div><p id="exportResult"></p></section>
+    </div>
+  </section>
+  <section id="knowledge" class="page panel prose" hidden><h1>品牌知识库</h1><p>O · 原设计来源 / I · 案例推导 / E · 实验规则</p><div id="knowledgeList"></div></section>
+  <section id="assets" class="page panel prose" hidden><h1>视觉资源库</h1><p>八种可编辑条形构成。点击策略可在当前任务中试用。</p><div id="assetList" class="asset-list"></div></section>
+  <section id="rules" class="page panel prose" hidden><h1>设计规范</h1><div id="rulesList"></div></section>
+  <section id="skills" class="page panel prose" hidden><h1>专业 Skill</h1><div id="skillsList"></div></section>
+  <section id="workflow" class="page panel prose" hidden><h1>Workflow</h1><p>需求输入 → 主动采访 → 品牌规范调用 → 创意方向 → 人工审核① → JSON 指令 → 网页生成 → 程序与 GPT 自检 → 人工审核② → 优化与跨媒介延展 → 人工审核③ → 文件交付 → 经验记录。</p><p>GPT 步骤在外部完成，指令由用户传入网页。网页保留当前任务审核状态、意见和归档快照。</p></section>
+  <section id="history" class="page panel prose" hidden><h1>历史作品</h1><div id="historyList"></div><div class="actions"><button id="saveBackup" type="button">导出完整备份</button><label class="file-button">恢复备份<input id="backupFile" type="file" accept=".json,application/json"></label></div><p id="backupResult"></p></section>
+  <section id="experience" class="page panel prose" hidden><h1>经验管理</h1><p id="latestVersion"></p><form id="feedbackForm" class="fields"><label>适用类别<input name="category" value="lecture" required></label><label>图形密度上限<input name="cap" type="number" step=".01" min=".25" max=".85" value=".45" required></label><label class="span">修改依据<textarea name="reason" rows="3" required></textarea></label><button class="primary" type="submit">提交长期建议</button></form><div id="feedbackList"></div></section>
+  </main>
+  </div>
+  <dialog id="zoomDialog"><div class="dialog-head"><strong>作品预览</strong><button id="closeZoom" type="button">关闭</button></div><div id="zoomContent"></div></dialog>
+</body>
+</html>

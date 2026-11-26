@@ -1,0 +1,538 @@
+{
+  "rules": {
+    "version": "0.1.0",
+    "source": "E",
+    "label": "PSA视觉语言研究｜非官方教学实验",
+    "media": {
+      "poster": {
+        "label": "竖版海报",
+        "width": 1080,
+        "height": 1620
+      },
+      "social": {
+        "label": "社交媒体图",
+        "width": 1080,
+        "height": 1080
+      },
+      "wechat_cover": {
+        "label": "公众号封面",
+        "width": 1080,
+        "height": 460
+      }
+    },
+    "grid": {
+      "columns": 6,
+      "marginRatio": 0.06,
+      "gutterRatio": 0.02
+    },
+    "palettes": {
+      "P01": {
+        "label": "基础黑白",
+        "colors": [
+          "#202020",
+          "#FFFFFF",
+          "#EAEAEA"
+        ],
+        "background": "#EAEAEA",
+        "ink": "#202020",
+        "graphic": [
+          "#202020",
+          "#FFFFFF"
+        ]
+      },
+      "P02": {
+        "label": "高能量活动",
+        "colors": [
+          "#008BBE",
+          "#F2E500",
+          "#EF4D50",
+          "#202020",
+          "#FFFFFF"
+        ],
+        "background": "#FFFFFF",
+        "ink": "#202020",
+        "graphic": [
+          "#008BBE",
+          "#F2E500",
+          "#EF4D50"
+        ]
+      },
+      "P03": {
+        "label": "单色主题",
+        "colors": [
+          "#214BE5",
+          "#202020",
+          "#FFFFFF"
+        ],
+        "background": "#FFFFFF",
+        "ink": "#202020",
+        "graphic": [
+          "#214BE5",
+          "#202020"
+        ]
+      }
+    },
+    "strategies": {
+      "parallel": "平行",
+      "cross": "交叉",
+      "radial": "发散",
+      "stairs": "递进",
+      "frame": "围合",
+      "cluster": "聚合",
+      "weave": "穿插",
+      "deconstruct": "解构"
+    },
+    "layouts": {
+      "bilingual_columns": "双语分栏",
+      "graphic_dominant": "主体放大",
+      "asymmetric": "非对称",
+      "full_bleed": "边缘出血",
+      "information_dominant": "信息主导"
+    },
+    "barRatios": [
+      3,
+      4,
+      8
+    ],
+    "barCount": [
+      3,
+      12
+    ],
+    "density": [
+      0.25,
+      0.85
+    ],
+    "title": [
+      0.06,
+      0.12
+    ],
+    "subtitle": [
+      0.03,
+      0.05
+    ],
+    "description": [
+      0.022,
+      0.03
+    ],
+    "caption": [
+      0.016,
+      0.025
+    ],
+    "densityCaps": {},
+    "font": "Inter, Noto Sans CJK SC, Source Han Sans SC, Microsoft YaHei, PingFang SC, Arial, sans-serif"
+  },
+  "designSchema": {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "urn:psa-research:design:1.0",
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "schema_version",
+      "task_id",
+      "rule_version",
+      "research_only",
+      "brief",
+      "content",
+      "design",
+      "outputs",
+      "approval"
+    ],
+    "properties": {
+      "schema_version": {
+        "const": "1.0"
+      },
+      "task_id": {
+        "type": "string",
+        "pattern": "^[A-Za-z0-9_-]{1,64}$"
+      },
+      "rule_version": {
+        "type": "string",
+        "pattern": "^0\\.1\\.[0-9]+$"
+      },
+      "research_only": {
+        "const": true
+      },
+      "brief": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "category",
+          "audience",
+          "purpose"
+        ],
+        "properties": {
+          "category": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_]{0,39}$"
+          },
+          "audience": {
+            "$ref": "#/$defs/label"
+          },
+          "purpose": {
+            "$ref": "#/$defs/label"
+          }
+        }
+      },
+      "content": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "title_zh",
+          "title_en",
+          "subtitle",
+          "description",
+          "date",
+          "location"
+        ],
+        "properties": {
+          "title_zh": {
+            "$ref": "#/$defs/label"
+          },
+          "title_en": {
+            "$ref": "#/$defs/label"
+          },
+          "subtitle": {
+            "$ref": "#/$defs/label"
+          },
+          "description": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1000,
+            "pattern": "\\S"
+          },
+          "date": {
+            "$ref": "#/$defs/optional"
+          },
+          "location": {
+            "$ref": "#/$defs/optional"
+          }
+        }
+      },
+      "design": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "concept",
+          "palette_id",
+          "layout",
+          "graphic_strategy",
+          "graphic_density",
+          "title_size_ratio",
+          "seed"
+        ],
+        "properties": {
+          "concept": {
+            "$ref": "#/$defs/label"
+          },
+          "palette_id": {
+            "enum": [
+              "P01",
+              "P02",
+              "P03"
+            ]
+          },
+          "layout": {
+            "enum": [
+              "bilingual_columns",
+              "graphic_dominant",
+              "asymmetric",
+              "full_bleed",
+              "information_dominant"
+            ]
+          },
+          "graphic_strategy": {
+            "enum": [
+              "parallel",
+              "cross",
+              "radial",
+              "stairs",
+              "frame",
+              "cluster",
+              "weave",
+              "deconstruct"
+            ]
+          },
+          "graphic_density": {
+            "type": "number",
+            "minimum": 0.25,
+            "maximum": 0.85
+          },
+          "title_size_ratio": {
+            "type": "number",
+            "minimum": 0.06,
+            "maximum": 0.12
+          },
+          "seed": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 4294967295
+          }
+        }
+      },
+      "outputs": {
+        "type": "array",
+        "minItems": 1,
+        "uniqueItems": true,
+        "items": {
+          "enum": [
+            "poster",
+            "social",
+            "wechat_cover"
+          ]
+        }
+      },
+      "approval": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "brief_approved",
+          "concept_approved",
+          "final_approved"
+        ],
+        "properties": {
+          "brief_approved": {
+            "type": "boolean"
+          },
+          "concept_approved": {
+            "type": "boolean"
+          },
+          "final_approved": {
+            "type": "boolean"
+          }
+        }
+      }
+    },
+    "$defs": {
+      "label": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 240,
+        "pattern": "\\S"
+      },
+      "optional": {
+        "anyOf": [
+          {
+            "type": "null"
+          },
+          {
+            "$ref": "#/$defs/label"
+          }
+        ]
+      }
+    }
+  },
+  "knowledge": [
+    {
+      "id": "K01",
+      "title": "品牌文化",
+      "source": "O",
+      "text": "上海当代艺术博物馆（PSA）坐落于一座旧发电厂。建筑烟囱及主体结构启发了沈浩鹏设计的原始标志。",
+      "refs": [
+        "https://thonik.nl/work/power-station-of-art/",
+        "https://thonik.nl/stories/on-bilingual-design"
+      ]
+    },
+    {
+      "id": "K02",
+      "title": "视觉图形",
+      "source": "O",
+      "text": "thonik 以标志中的五条长度不同的条形作为一组可重组工具，在周年项目中组合成数字 10。工作台使用原创条形构成。",
+      "refs": [
+        "https://thonik.nl/stories/power-station-of-art-10th-anniversary/"
+      ]
+    },
+    {
+      "id": "K03",
+      "title": "色彩规范",
+      "source": "E",
+      "text": "P01 基础黑白、P02 高能量活动、P03 单色主题。其色值为教学实验参数。",
+      "refs": []
+    },
+    {
+      "id": "K04",
+      "title": "字体规范",
+      "source": "O / E",
+      "text": "设计团队强调中英文的视觉平衡。实验中优先匹配系统已安装的 Inter 或思源黑体，再使用系统中文无衬线字体。",
+      "refs": [
+        "https://thonik.nl/stories/on-bilingual-design"
+      ]
+    },
+    {
+      "id": "K05",
+      "title": "网格与构图",
+      "source": "I / E",
+      "text": "从案例提取模块化、图文层级和留白；六列、6% 安全边距、五种布局均为本实验量化规则。",
+      "refs": [
+        "https://thonik.nl/work/power-station-of-art/"
+      ]
+    },
+    {
+      "id": "K06",
+      "title": "案例与来源",
+      "source": "O / I",
+      "text": "研究入口包括 thonik 品牌案例、十周年、双语设计与 PSA 发布的展览海报档案。不同展览的主题与图形策略各自独立。",
+      "refs": [
+        "https://thonik.nl/work/power-station-of-art/",
+        "https://artsandculture.google.com/story/RgUhewcr6RhGLA",
+        "https://www.powerstationofart.com/"
+      ]
+    },
+    {
+      "id": "K07",
+      "title": "质量评价",
+      "source": "E",
+      "text": "先执行尺寸、色板、边界、信息、对比、图形合规和复现检查，再由人工评价品牌一致性25%、审美25%、规范20%、需求15%、延展10%、多样性5%。教学目标80分。",
+      "refs": []
+    },
+    {
+      "id": "K08",
+      "title": "经验与反馈",
+      "source": "E",
+      "text": "保存退回和审核意见。分类密度上限在人工批准后成为新版本规则，旧任务继续调用其保存版本。",
+      "refs": []
+    }
+  ],
+  "skills": [
+    {
+      "id": "S01",
+      "title": "需求分析与主动采访",
+      "role": "将任务输入整理为受众、目的、内容与媒介。",
+      "input": "当前需求、既有任务决策",
+      "steps": [
+        "一次只问一个必要问题",
+        "复述任务目标",
+        "等待人工确认"
+      ],
+      "constraint": "历史已确认事项直接沿用；虚构测试任务不新增日期地点",
+      "output": "结构化 brief 和 content",
+      "inspection": "事实可追溯，必填字段完整"
+    },
+    {
+      "id": "S02",
+      "title": "品牌知识理解",
+      "role": "以机构文化和公开案例作为设计依据。",
+      "input": "K01 品牌文化、K06 案例来源",
+      "steps": [
+        "确认机构语境",
+        "阅读设计团队说明",
+        "从已有视觉案例辨认图形逻辑"
+      ],
+      "constraint": "标明 O、I、E 来源；使用原创实验图形",
+      "output": "品牌依据及来源",
+      "inspection": "原始资料和实验判断可追溯"
+    },
+    {
+      "id": "S03",
+      "title": "设计规范调用",
+      "role": "将品牌规则转为可执行的参数。",
+      "input": "设计任务、当前规则版本",
+      "steps": [
+        "定位相关类别",
+        "读取色板、网格及媒介规则",
+        "应用该类别已批准的密度上限"
+      ],
+      "constraint": "保留历史版本；遵守强制参数范围",
+      "output": "规则版本与参数约束",
+      "inspection": "协议合法且版本匹配"
+    },
+    {
+      "id": "S04",
+      "title": "创意策略制定",
+      "role": "提出适合受众和主题的视觉构成方案。",
+      "input": "brief、品牌知识、设计规则",
+      "steps": [
+        "提炼主题关键词",
+        "选择图形语法、色板和构图",
+        "说明理由并提供候选"
+      ],
+      "constraint": "候选有可观察的构图差异",
+      "output": "创意方向与待审核决策",
+      "inspection": "形式与主题关系可解释"
+    },
+    {
+      "id": "S05",
+      "title": "模块化图形构成",
+      "role": "生成条形模块组成的原创几何结构。",
+      "input": "图形语法、种子、密度、色板",
+      "steps": [
+        "按语法布置条形",
+        "计算比例、旋转与间距",
+        "裁切在图形区域"
+      ],
+      "constraint": "3:1、4:1、8:1；3–12 个条形",
+      "output": "可编辑的 SVG 矢量条形",
+      "inspection": "参数合规且相同输入可复现"
+    },
+    {
+      "id": "S06",
+      "title": "网格与信息排版",
+      "role": "按媒介与文字优先级完成安全排版。",
+      "input": "内容、六列网格、构图区",
+      "steps": [
+        "划分信息与图形区",
+        "真实测量字宽并换行",
+        "检查文本边界与重叠"
+      ],
+      "constraint": "字体替代有记录；内容无法容纳时报告",
+      "output": "中英文文本层及实际检测结果",
+      "inspection": "标题完整、安全边距合规"
+    },
+    {
+      "id": "S07",
+      "title": "跨媒介视觉延展",
+      "role": "为三种媒介创建保持概念一致的独立版式。",
+      "input": "通过审核的方向、主题、输出数组",
+      "steps": [
+        "读取各媒介尺寸",
+        "独立分区与排版",
+        "核对色板和语法一致"
+      ],
+      "constraint": "为 1080×1620、1080×1080、1080×460 独立计算",
+      "output": "同一主题的系列作品",
+      "inspection": "尺寸、可读性、概念一致性"
+    },
+    {
+      "id": "S08",
+      "title": "设计质量自检",
+      "role": "依据实际检测和外部 GPT 审美评价修订设计。",
+      "input": "SVG 或 PNG、检测报告、评价量表",
+      "steps": [
+        "运行程序检测",
+        "核对错误依据",
+        "将作品送外部 GPT 审美自检",
+        "提供人工量表"
+      ],
+      "constraint": "硬规则违规须修复；网页审美状态为待人工审核",
+      "output": "可定位的错误、评分与修改依据",
+      "inspection": "报告包含实测值及未检测状态"
+    },
+    {
+      "id": "S09",
+      "title": "反馈理解及设计修改",
+      "role": "将人工意见反馈为可审查的稿件变更。",
+      "input": "方案、审核意见、检测报告",
+      "steps": [
+        "保留意见与修订历史",
+        "修改文案或参数",
+        "按流程重新审核"
+      ],
+      "constraint": "当前修改作用于当前任务，长期建议另行批准",
+      "output": "更新后的作品与审核记录",
+      "inspection": "退回后审批状态正确"
+    },
+    {
+      "id": "S10",
+      "title": "长期设计经验积累",
+      "role": "将可复用的经验发布为可执行规则版本。",
+      "input": "人工意见、类别、关联任务",
+      "steps": [
+        "提出可量化阈值",
+        "人工批准或退回",
+        "发布新版本并检查新旧任务"
+      ],
+      "constraint": "旧作品绑定原规则版本；变更只影响适用类别",
+      "output": "建议、审核、规则版本及备份",
+      "inspection": "通过后实际影响新任务，旧任务仍可复现"
+    }
+  ]
+}
